@@ -3,6 +3,9 @@
 :root {
   --black-color: #000;
   --white-color: #fff;
+
+  --header-height: 60px;
+  --max-width: 1200px;
 }
 
 * {
@@ -12,5 +15,15 @@
 }
 
 body {
+  font-family: "Roboto", serif;
+  background-color: var(--white-color);
+}
+
+a[href] {
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+input {
   font-family: "Roboto", serif;
 }
