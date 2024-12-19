@@ -1,5 +1,9 @@
 import search_icon from "./magnifying-glass-solid.svg";
+import play_icon from "./play-solid.svg";
 
-export const icons = {
+const icons = {
   search_icon,
+  play_icon,
 };
+
+export default icons;
