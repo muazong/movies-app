@@ -30,7 +30,10 @@ function HomeBody() {
         </div>
       </div>
 
-      <MovieList category="Up coming" />
+      <MovieList category="Up Coming" type="upcoming" />
+      <MovieList category="Top Rated" type="top_rated" />
+      <MovieList category="Now Playing" type="now_playing" />
+      <MovieList category="Popular" type="popular" />
     </div>
   );
 }
