@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "../pages/Home";
@@ -29,9 +28,5 @@ const router = createBrowserRouter([
 function Router() {
   return <RouterProvider router={router} />;
 }
-
-Router.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Router;
