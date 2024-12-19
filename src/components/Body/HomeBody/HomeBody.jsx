@@ -1,6 +1,8 @@
-import icons from "../../../assets/icons/icons";
-import images from "../../../assets/images/images";
+import icons from "../../../assets/icons";
+import images from "../../../assets/images";
+
 import "./HomeBody.scss";
+import MovieList from "../MovieList";
 
 function HomeBody() {
   return (
@@ -27,6 +29,8 @@ function HomeBody() {
           <img src={images.poster} className="poster" alt="" />
         </div>
       </div>
+
+      <MovieList category="Up coming" />
     </div>
   );
 }
