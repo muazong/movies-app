@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import icons from "../../assets/icons/icons";
+import icons from "../../assets/icons";
 
 import "./Header.scss";
 
