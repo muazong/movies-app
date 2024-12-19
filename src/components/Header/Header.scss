@@ -15,8 +15,10 @@
   padding: 0 20px;
 }
 
-.logo {
+.logo h1 {
+  user-select: none;
   font-family: "Irish Grover", serif;
+  font-weight: 700;
   color: var(--white-color);
 }
 
@@ -38,8 +40,13 @@
 }
 
 .search {
+  --height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
   & input {
-    height: 30px;
+    height: var(--height);
     width: 200px;
     padding: 6px;
     font-size: 14px;
@@ -54,9 +61,18 @@
     }
   }
 
+  & button {
+    height: var(--height);
+    width: var(--height);
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+  }
+
   & img {
-    width: 12px;
-    height: 12px;
-    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
+    width: 14px;
+    height: 14px;
   }
 }

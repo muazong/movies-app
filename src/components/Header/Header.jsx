@@ -1,11 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { icons } from "../../assets/icons/icons";
+
 import "./Header.scss";
 
 function Header() {
   return (
     <div className="header">
       <div className="logo">
-        <h1>AZNG</h1>
+        <Link to="/">
+          <h1>AZNG</h1>
+        </Link>
       </div>
       <div className="navigation">
         <NavLink
@@ -20,6 +24,9 @@ function Header() {
       </div>
       <div className="search">
         <input type="text" placeholder="Search for movies" />
+        <button>
+          <img src={icons.search_icon} alt="" />
+        </button>
       </div>
     </div>
   );
