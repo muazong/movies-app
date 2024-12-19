@@ -3,6 +3,7 @@
 :root {
   --black-color: #000;
   --white-color: #fff;
+  --orage-color: #ffc145;
 
   --header-height: 60px;
   --max-width: 1200px;
@@ -25,6 +26,7 @@ a[href] {
   color: var(--black-color);
 }
 
-input {
+input,
+button {
   font-family: "Roboto", serif;
 }
