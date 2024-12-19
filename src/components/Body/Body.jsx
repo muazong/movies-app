@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./Body.scss";
 import HomeBody from "./HomeBody";
 import PopularBody from "./PopularBody";
-import TvShowsBody from "./TvShowsBody/TvShows";
+import TvShowsBody from "./TvShowsBody";
 import AboutBody from "./AboutBody";
 
 function Body({ page = "home" }) {
