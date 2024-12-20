@@ -36,7 +36,13 @@ function MovieList({ category = "Up Coming", type = "upcoming" }) {
         {movieData
           ? movieData.map((movie) => {
               return (
-                <div className="movie-list-item" key={movie.id}>
+                <div
+                  className="movie-list-item"
+                  key={movie.id}
+                  onClick={() =>
+                    (window.location.href = `/trailer/${movie.id}`)
+                  }
+                >
                   <div className="item-img">
                     <div className="background"></div>
                     <img src={icons.play_icon} className="play-icon" alt="" />

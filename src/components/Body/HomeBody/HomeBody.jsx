@@ -9,6 +9,9 @@ import "./HomeBody.scss";
 
 function Banner() {
   const bannerData = useMoviesFetch("upcoming")[0];
+  const handleClick = (id) => {
+    window.location.href = `/trailer/${id}`;
+  };
 
   return bannerData ? (
     <div
@@ -23,9 +26,9 @@ function Banner() {
           <h1>{bannerData?.original_title}</h1>
           <p>{bannerData?.overview}</p>
         </div>
-        <button>Watch Now</button>
+        <button onClick={() => handleClick(bannerData.id)}>Watch Now</button>
       </div>
-      <div className="movie-image">
+      <div className="movie-image" onClick={() => handleClick(bannerData.id)}>
         <img src={icons.play_icon} className="play-icon" alt="" />
         <img
           src={IMAGE_URL + bannerData?.poster_path}
