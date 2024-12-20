@@ -25,31 +25,33 @@ function useMoviesFetch(type) {
       alert("Error fetching movies" + error);
     }
   };
-
   useEffect(() => handleFetch, []);
 
   return movieData;
 }
 
 function useTrailerFetch(id) {
-  const [trailerData, setTrailerData] = useState({});
+  const [videoData, setVideoData] = useState([]);
+  const [detailData, setDetailData] = useState([]);
 
   const handleFetch = async () => {
-    try {
-      const response = await fetch(
-        `${URL}movie/${id}/videos?language=en-US`,
-        options,
-      );
-      const data = await response.json();
-      setTrailerData(data.results[0]);
-    } catch (error) {
-      alert("Error fetching movies" + error);
-    }
-  };
+    const video_url = `${URL}movie/${id}/videos?language=en-US`;
+    const detail_url = `${URL}movie/${id}?language=en-US`;
 
+    const [video, detail] = await Promise.all([
+      fetch(video_url, options),
+      fetch(detail_url, options),
+    ]);
+
+    const videoData = await video.json();
+    const detailData = await detail.json();
+
+    setVideoData(videoData.results[0]);
+    setDetailData(detailData);
+  };
   useEffect(() => handleFetch, []);
 
-  return trailerData;
+  return { videoData, detailData };
 }
 
 export { useMoviesFetch, useTrailerFetch };
