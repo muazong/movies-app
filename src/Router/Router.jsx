@@ -5,6 +5,7 @@ import Popular from "../pages/Popular";
 import TvShows from "../pages/TvShows";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
+import Trailer from "../pages/Trailer";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />,
+  },
+  {
+    path: "/trailer/:trailerId",
+    element: <Trailer />,
   },
 ]);
 
