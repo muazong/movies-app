@@ -13,12 +13,16 @@ function useMoviesFetch(type) {
   };
 
   const handleFetch = async () => {
-    const response = await fetch(
-      `${URL}movie/${type}?language=en-US&page=1`,
-      options,
-    );
-    const data = await response.json();
-    setMovieData(data.results);
+    try {
+      const response = await fetch(
+        `${URL}movie/${type}?language=en-US&page=1`,
+        options,
+      );
+      const data = await response.json();
+      setMovieData(data.results);
+    } catch (error) {
+      alert("Error fetching movies" + error);
+    }
   };
 
   useEffect(() => handleFetch, []);
