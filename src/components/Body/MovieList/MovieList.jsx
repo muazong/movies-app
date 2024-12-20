@@ -5,8 +5,7 @@ import { useMoviesFetch } from "../../../custom-hooks";
 
 import icons from "../../../assets/icons";
 import "./MovieList.scss";
-
-const IMG_URL = import.meta.env.VITE_API_IMAGE;
+import { IMAGE_URL } from "../../../assets/tokens";
 
 const responsive = {
   superLargeDesktop: {
@@ -33,24 +32,25 @@ function MovieList({ category = "Up Coming", type = "upcoming" }) {
   return (
     <div className="movie-list-wrapper">
       <h1>{category}</h1>
-
       <Carousel responsive={responsive} className="movie-list">
-        {movieData.map((movie) => {
-          return (
-            <div className="movie-list-item" key={movie.id}>
-              <div className="item-img">
-                <div className="background"></div>
-                <img src={icons.play_icon} className="play-icon" alt="" />
-                <img
-                  src={IMG_URL + movie.poster_path}
-                  className="poster"
-                  alt=""
-                />
-              </div>
-              <h3>{movie.original_title}</h3>
-            </div>
-          );
-        })}
+        {movieData
+          ? movieData.map((movie) => {
+              return (
+                <div className="movie-list-item" key={movie.id}>
+                  <div className="item-img">
+                    <div className="background"></div>
+                    <img src={icons.play_icon} className="play-icon" alt="" />
+                    <img
+                      src={IMAGE_URL + movie.poster_path}
+                      className="poster"
+                      alt=""
+                    />
+                  </div>
+                  <h3>{movie.original_title}</h3>
+                </div>
+              );
+            })
+          : ""}
       </Carousel>
     </div>
   );
