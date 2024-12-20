@@ -6,6 +6,7 @@
   --orage-color: #ffc145;
 
   --header-height: 60px;
+  --footer-height: 240px;
   --max-width: 1200px;
 }
 
@@ -24,6 +25,10 @@ body {
 a[href] {
   text-decoration: none;
   color: var(--black-color);
+}
+
+ul {
+  list-style-type: none;
 }
 
 input,
