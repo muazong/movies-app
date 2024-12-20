@@ -1,35 +1,48 @@
+import { useMoviesFetch } from "../../../custom-hooks";
+
 import icons from "../../../assets/icons";
-import images from "../../../assets/images";
+import { IMAGE_URL } from "../../../assets/tokens";
+
+import MovieList from "../MovieList";
 
 import "./HomeBody.scss";
-import MovieList from "../MovieList";
+
+function Banner() {
+  const bannerData = useMoviesFetch("upcoming")[0];
+
+  return bannerData ? (
+    <div
+      className="banner"
+      style={{
+        backgroundImage: `url(${IMAGE_URL}${bannerData?.backdrop_path})`,
+      }}
+    >
+      <div className="background"></div>
+      <div className="info">
+        <div className="text">
+          <h1>{bannerData?.original_title}</h1>
+          <p>{bannerData?.overview}</p>
+        </div>
+        <button>Watch Now</button>
+      </div>
+      <div className="movie-image">
+        <img src={icons.play_icon} className="play-icon" alt="" />
+        <img
+          src={IMAGE_URL + bannerData?.poster_path}
+          className="poster"
+          alt=""
+        />
+      </div>
+    </div>
+  ) : (
+    ""
+  );
+}
 
 function HomeBody() {
   return (
     <div className="home-body">
-      <div className="banner">
-        <div className="info">
-          <div className="text">
-            <h1>Arcane</h1>
-            <p>
-              Amid the stark discord of twin cities Piltover and Zaun, two
-              sisters fight on rival sides of a war between magic technologies
-              and clashing convictions. Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Vero alias tenetur illum. Voluptatem
-              exercitationem unde provident placeat vel dolore eos. Praesentium
-              enim minus impedit dolore esse excepturi qui, earum quia! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Dolor, quos?
-            </p>
-          </div>
-          <button>Watch Now</button>
-        </div>
-        <div className="movie-image">
-          <div className="background"></div>
-          <img src={icons.play_icon} className="play-icon" alt="" />
-          <img src={images.poster} className="poster" alt="" />
-        </div>
-      </div>
-
+      <Banner />
       <MovieList category="Up Coming" type="upcoming" />
       <MovieList category="Top Rated" type="top_rated" />
       <MovieList category="Now Playing" type="now_playing" />
