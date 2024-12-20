@@ -1,19 +1,19 @@
 .movie-list-wrapper {
   max-width: var(--max-width);
   padding: 20px 0 0;
+  background: rgba(0, 0, 0, 0.5);
 
   h1 {
     text-align: left;
+    margin-left: 12px;
     margin-bottom: 12px;
   }
 }
 
 .movie-list {
   display: flex;
-  overflow-x: scroll;
-  scrollbar-width: none;
   border-bottom: 1px solid var(--orage-color);
-  padding-bottom: 20px;
+  margin-top: 20px;
   user-select: none;
 
   .movie-list-item {
@@ -21,10 +21,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 12px;
+    margin: 2px 10px;
 
     .item-img {
       position: relative;
+      width: 220px;
+      height: 340px;
 
       .play-icon {
         width: 40px;

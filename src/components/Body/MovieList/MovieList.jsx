@@ -6,6 +6,8 @@ import { useMoviesFetch } from "../../../custom-hooks";
 import icons from "../../../assets/icons";
 import "./MovieList.scss";
 
+const IMG_URL = import.meta.env.VITE_API_IMAGE;
+
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -13,7 +15,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 5,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -27,8 +29,6 @@ const responsive = {
 
 function MovieList({ category = "Up Coming", type = "upcoming" }) {
   const movieData = useMoviesFetch(type);
-  const img_url = "https://image.tmdb.org/t/p/w500/";
-  console.log(movieData);
 
   return (
     <div className="movie-list-wrapper">
@@ -42,7 +42,7 @@ function MovieList({ category = "Up Coming", type = "upcoming" }) {
                 <div className="background"></div>
                 <img src={icons.play_icon} className="play-icon" alt="" />
                 <img
-                  src={img_url + movie.poster_path}
+                  src={IMG_URL + movie.poster_path}
                   className="poster"
                   alt=""
                 />
