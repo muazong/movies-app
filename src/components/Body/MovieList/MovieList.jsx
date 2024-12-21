@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useNavigate } from "react-router-dom";
 import { useMoviesFetch } from "../../../custom-hooks";
 
 import icons from "../../../assets/icons";
@@ -28,6 +29,7 @@ const responsive = {
 
 function MovieList({ category = "Up Coming", type = "upcoming" }) {
   const movieData = useMoviesFetch(type);
+  const navigate = useNavigate();
 
   return (
     <div className="movie-list-wrapper">
@@ -39,9 +41,7 @@ function MovieList({ category = "Up Coming", type = "upcoming" }) {
                 <div
                   className="movie-list-item"
                   key={movie.id}
-                  onClick={() =>
-                    (window.location.href = `/trailer/${movie.id}`)
-                  }
+                  onClick={() => navigate(`/trailer/${movie.id}`)}
                 >
                   <div className="item-img">
                     <div className="background"></div>

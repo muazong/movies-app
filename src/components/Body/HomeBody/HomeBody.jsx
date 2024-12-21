@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useMoviesFetch } from "../../../custom-hooks";
 
 import icons from "../../../assets/icons";
@@ -9,9 +10,7 @@ import "./HomeBody.scss";
 
 function Banner() {
   const bannerData = useMoviesFetch("upcoming")[0];
-  const handleClick = (id) => {
-    window.location.href = `/trailer/${id}`;
-  };
+  const navigate = useNavigate();
 
   return bannerData ? (
     <div
@@ -26,9 +25,14 @@ function Banner() {
           <h1>{bannerData?.original_title}</h1>
           <p>{bannerData?.overview}</p>
         </div>
-        <button onClick={() => handleClick(bannerData.id)}>Watch Now</button>
+        <button onClick={() => navigate(`/trailer/${bannerData?.id}`)}>
+          Watch Now
+        </button>
       </div>
-      <div className="movie-image" onClick={() => handleClick(bannerData.id)}>
+      <div
+        className="movie-image"
+        onClick={() => navigate(`/trailer/${bannerData?.id}`)}
+      >
         <img src={icons.play_icon} className="play-icon" alt="" />
         <img
           src={IMAGE_URL + bannerData?.poster_path}
