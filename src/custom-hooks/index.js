@@ -35,27 +35,32 @@ function useMoviesFetch(type) {
 function useTrailerFetch(id) {
   const [videoData, setVideoData] = useState([]);
   const [detailData, setDetailData] = useState([]);
+  const [creditData, setCreditData] = useState([]);
 
   useEffect(
     () => async () => {
-      const video_url = `${URL}movie/${id}/videos?language=en-US`;
-      const detail_url = `${URL}movie/${id}?language=en-US`;
+      const video_url = `${URL}${id}/videos?language=en-US`;
+      const detail_url = `${URL}${id}?language=en-US`;
+      const credit_url = `${URL}${id}/credits?language=en-US`;
 
-      const [video, detail] = await Promise.all([
+      const [video, detail, credit] = await Promise.all([
         fetch(video_url, options),
         fetch(detail_url, options),
+        fetch(credit_url, options),
       ]);
 
       const videoData = await video.json();
       const detailData = await detail.json();
+      const creditData = await credit.json();
 
       setVideoData(videoData.results[0]);
       setDetailData(detailData);
+      setCreditData(creditData);
     },
     [],
   );
 
-  return { videoData, detailData };
+  return { videoData, detailData, creditData };
 }
 
 export { useMoviesFetch, useTrailerFetch };
