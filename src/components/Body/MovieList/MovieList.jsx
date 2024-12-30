@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useNavigate } from "react-router-dom";
-import { useMoviesFetch } from "../../../custom-hooks";
+import { useMovies } from "../../../custom-hooks";
 
 import icons from "../../../assets/icons";
 import "./MovieList.scss";
@@ -28,15 +28,15 @@ const responsive = {
 };
 
 function MovieList({ category = "Up Coming", type = "upcoming" }) {
-  const movieData = useMoviesFetch(type);
+  const { movies } = useMovies(type);
   const navigate = useNavigate();
 
   return (
     <div className="movie-list-wrapper">
       <h1>{category}</h1>
       <Carousel responsive={responsive} className="movie-list">
-        {movieData
-          ? movieData.map((movie) => {
+        {movies
+          ? movies.map((movie) => {
               return (
                 <div
                   className="movie-list-item"
