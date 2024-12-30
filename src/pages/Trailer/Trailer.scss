@@ -1,3 +1,5 @@
 .trailer-wrapper {
-  height: 100vh;
+  min-height: 100vh;
+  width: var(--max-width);
+  margin: 0 auto;
 }
