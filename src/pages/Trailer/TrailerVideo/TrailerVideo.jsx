@@ -18,10 +18,12 @@ function formattedNumber(number) {
 }
 
 function TrailerVideo({ trailer, detail }) {
+  const trailerIdx = Math.floor(Math.random() * trailer.results?.length);
+
   return trailer.results && detail ? (
     <div className="trailer-video">
       <iframe
-        src={`https://www.youtube.com/embed/${trailer.results[0].key}`}
+        src={`https://www.youtube.com/embed/${trailer.results[trailerIdx].key}`}
         title={`${detail.original_title} - ${detail.tagline}`}
         referrerPolicy="strict-origin-when-cross-origin"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
