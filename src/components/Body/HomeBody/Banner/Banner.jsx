@@ -41,7 +41,7 @@ function Banner({ type = "upcoming" }) {
       </div>
     </div>
   ) : (
-    ""
+    <div style={{ height: "600px" }}></div>
   );
 }
 
