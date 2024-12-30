@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useMovies } from "../../../custom-hooks";
+import { useMovies } from "../../../../custom-hooks";
 import PropTypes from "prop-types";
 
-import icons from "../../../assets/icons";
-import { IMAGE_URL } from "../../../assets/tokens";
+import icons from "../../../../assets/icons";
+import { IMAGE_URL } from "../../../../assets/tokens";
+
+import "./Banner.scss";
 
 function Banner({ type = "upcoming" }) {
   const { movies, isLoading } = useMovies(type);
