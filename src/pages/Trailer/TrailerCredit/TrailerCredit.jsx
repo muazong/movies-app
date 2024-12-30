@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { IMAGE_URL } from "../../../assets/tokens";
 
+import "./TrailerCredit.scss";
+
 function TrailerCredit({ credit }) {
   return (
     <div className="trailer-credits">
