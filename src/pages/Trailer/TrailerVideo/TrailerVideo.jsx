@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import icons from "../../../assets/icons";
+import "./TrailerVideo.scss";
 
 function calculateTime(time) {
   const hours = Math.floor(time / 60);
@@ -15,7 +17,7 @@ function formattedNumber(number) {
   return result;
 }
 
-function TrailerVideoInfo({ trailer, detail }) {
+function TrailerVideo({ trailer, detail }) {
   return trailer.results && detail ? (
     <div className="trailer-video">
       <iframe
@@ -108,4 +110,9 @@ function TrailerVideoInfo({ trailer, detail }) {
   );
 }
 
-export default TrailerVideoInfo;
+TrailerVideo.propTypes = {
+  trailer: PropTypes.object.isRequired,
+  detail: PropTypes.object.isRequired,
+};
+
+export default TrailerVideo;

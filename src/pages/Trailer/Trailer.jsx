@@ -6,8 +6,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import "./Trailer.scss";
-import TrailerVideoInfo from "./components/TrailerVideoInfo";
-import TrailerCredit from "./components/TrailerCredit";
+import TrailerCredit from "./TrailerCredit";
+import TrailerVideo from "./TrailerVideo";
 
 function Trailer() {
   const { trailerId } = useParams();
@@ -20,8 +20,8 @@ function Trailer() {
   return (
     <>
       <Header />
-      <div className="trailer">
-        <TrailerVideoInfo trailer={trailer} detail={detail} />
+      <div className="trailer-wrapper">
+        <TrailerVideo trailer={trailer} detail={detail} />
         <TrailerCredit credit={credit} />
       </div>
       <Footer />

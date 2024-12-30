@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { IMAGE_URL } from "../../../assets/tokens";
 
 function TrailerCredit({ credit }) {
@@ -20,5 +21,9 @@ function TrailerCredit({ credit }) {
     </div>
   );
 }
+
+TrailerCredit.propTypes = {
+  credit: PropTypes.object.isRequired,
+};
 
 export default TrailerCredit;
