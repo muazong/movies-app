@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { API_KEY, URL } from "../assets/tokens";
 
-const options = {
+const fetchOptions = {
   method: "GET",
   headers: {
     accept: "application/json",
@@ -10,57 +9,87 @@ const options = {
   },
 };
 
-function useMoviesFetch(type) {
-  const [movieData, setMovieData] = useState([]);
+function useMovies(type) {
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(
-    () => async () => {
+  const fetchData = useMemo(async () => {
+    try {
+      const response = await fetch(
+        `${URL}${type}?language=en-US&page=1`,
+        fetchOptions,
+      );
+      const data = await response.json();
+      setMovies(data.results);
+    } catch (error) {
+      setError(error);
+    }
+  }, [type]);
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      setIsLoading(true);
       try {
-        const response = await fetch(
-          `${URL}movie/${type}?language=en-US&page=1`,
-          options,
-        );
-        const data = await response.json();
-        setMovieData(data.results);
+        fetchData();
       } catch (error) {
-        alert("Error fetching movies" + error);
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
-    },
-    [],
-  );
+    };
+    fetchDataAsync();
+  }, [fetchData]);
 
-  return movieData;
+  return { movies, isLoading, error };
 }
 
-function useTrailerFetch(id) {
-  const [videoData, setVideoData] = useState([]);
-  const [detailData, setDetailData] = useState([]);
-  const [creditData, setCreditData] = useState([]);
+function useTrailer(id) {
+  const [data, setData] = useState({
+    trailer: [],
+    detail: [],
+    credit: [],
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(
-    () => async () => {
-      const video_url = `${URL}${id}/videos?language=en-US`;
-      const detail_url = `${URL}${id}?language=en-US`;
-      const credit_url = `${URL}${id}/credits?language=en-US`;
+  const fetchData = useMemo(async () => {
+    const trailer_url = `${URL}${id}/videos?language=en-US`;
+    const detail_url = `${URL}${id}?language=en-US`;
+    const credit_url = `${URL}${id}/credits?language=en-US`;
 
-      const [video, detail, credit] = await Promise.all([
-        fetch(video_url, options),
-        fetch(detail_url, options),
-        fetch(credit_url, options),
-      ]);
+    const [trailer, detail, credit] = await Promise.all([
+      fetch(trailer_url, fetchOptions),
+      fetch(detail_url, fetchOptions),
+      fetch(credit_url, fetchOptions),
+    ]);
 
-      const videoData = await video.json();
-      const detailData = await detail.json();
-      const creditData = await credit.json();
+    const trailer_data = await trailer.json();
+    const detail_data = await detail.json();
+    const credit_data = await credit.json();
 
-      setVideoData(videoData.results[0]);
-      setDetailData(detailData);
-      setCreditData(creditData);
-    },
-    [],
-  );
+    setData({
+      trailer: trailer_data,
+      detail: detail_data,
+      credit: credit_data,
+    });
+  }, [id]);
 
-  return { videoData, detailData, creditData };
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      try {
+        setIsLoading(true);
+        fetchData();
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchDataAsync();
+  }, [fetchData]);
+
+  return { ...data, isLoading, error };
 }
 
-export { useMoviesFetch, useTrailerFetch };
+export { useMovies, useTrailer };
