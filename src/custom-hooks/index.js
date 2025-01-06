@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API_KEY, URL } from "../assets/tokens";
 
 const fetchOptions = {
@@ -11,10 +11,8 @@ const fetchOptions = {
 
 function useMovies(type) {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const fetchData = useMemo(async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await fetch(
         `${URL}${type}?language=en-US&page=1`,
@@ -23,25 +21,15 @@ function useMovies(type) {
       const data = await response.json();
       setMovies(data.results);
     } catch (error) {
-      setError(error);
+      throw new Error(error);
     }
   }, [type]);
 
   useEffect(() => {
-    const fetchDataAsync = async () => {
-      setIsLoading(true);
-      try {
-        fetchData();
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchDataAsync();
+    fetchData();
   }, [fetchData]);
 
-  return { movies, isLoading, error };
+  return { movies };
 }
 
 function useTrailer(id) {

@@ -38,7 +38,7 @@ function Body({ page = "home" }) {
 }
 
 Body.propTypes = {
-  page: PropTypes.string.isRequired,
+  page: PropTypes.string,
 };
 
 export default Body;
