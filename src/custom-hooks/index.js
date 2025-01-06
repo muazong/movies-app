@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { API_KEY, URL } from "../assets/tokens";
 
 const fetchOptions = {
@@ -45,51 +45,39 @@ function useMovies(type) {
 }
 
 function useTrailer(id) {
-  const [data, setData] = useState({
-    trailer: [],
-    detail: [],
-    credit: [],
-  });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState({});
 
-  const fetchData = useMemo(async () => {
+  const fetchData = useCallback(async () => {
     const trailer_url = `${URL}${id}/videos?language=en-US`;
     const detail_url = `${URL}${id}?language=en-US`;
     const credit_url = `${URL}${id}/credits?language=en-US`;
 
-    const [trailer, detail, credit] = await Promise.all([
-      fetch(trailer_url, fetchOptions),
-      fetch(detail_url, fetchOptions),
-      fetch(credit_url, fetchOptions),
-    ]);
+    try {
+      const [trailer, detail, credit] = await Promise.all([
+        fetch(trailer_url, fetchOptions),
+        fetch(detail_url, fetchOptions),
+        fetch(credit_url, fetchOptions),
+      ]);
 
-    const trailer_data = await trailer.json();
-    const detail_data = await detail.json();
-    const credit_data = await credit.json();
+      const trailer_data = await trailer.json();
+      const detail_data = await detail.json();
+      const credit_data = await credit.json();
 
-    setData({
-      trailer: trailer_data,
-      detail: detail_data,
-      credit: credit_data,
-    });
+      setData({
+        trailer: trailer_data,
+        detail: detail_data,
+        credit: credit_data,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   }, [id]);
 
   useEffect(() => {
-    const fetchDataAsync = async () => {
-      try {
-        setIsLoading(true);
-        fetchData();
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchDataAsync();
+    fetchData();
   }, [fetchData]);
 
-  return { ...data, isLoading, error };
+  const { trailer, detail, credit } = data;
+  return { trailer, detail, credit };
 }
-
 export { useMovies, useTrailer };
