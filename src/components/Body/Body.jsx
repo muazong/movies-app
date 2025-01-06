@@ -5,6 +5,7 @@ import HomeBody from "./HomeBody";
 import PopularBody from "./PopularBody";
 import TvShowsBody from "./TvShowsBody";
 import AboutBody from "./AboutBody";
+import TrailerBody from "./TrailerBody";
 
 function Body({ page = "home" }) {
   const HandleBodyContent = () => {
@@ -22,6 +23,10 @@ function Body({ page = "home" }) {
 
     if (page === "about") {
       return <AboutBody />;
+    }
+
+    if (page === "trailer") {
+      return <TrailerBody />;
     }
   };
 

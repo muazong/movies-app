@@ -1,0 +1,21 @@
+.information-wrapper {
+  .genres {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    margin-bottom: 12px;
+  }
+
+  .overview {
+    text-align: justify;
+  }
+
+  .details {
+    margin-top: 20px;
+  }
+}

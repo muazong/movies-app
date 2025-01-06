@@ -1,25 +1,25 @@
-.casting-list {
+.person-list {
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 
-.casting {
+.person {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 
-  .casting-avatar {
+  .avatar {
     height: 70px;
     width: 70px;
     border-radius: 50%;
     object-fit: cover;
   }
 
-  .casting-name {
+  .name {
     font-size: 14px;
     margin-top: 12px;
   }

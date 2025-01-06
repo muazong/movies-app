@@ -1,0 +1,26 @@
+.trailer-video-wrapper {
+  background-color: var(--black-color);
+  max-width: var(--max-width);
+  margin: calc(var(--header-height) + 28px) auto 0;
+  display: flex;
+  gap: 20px;
+
+  .trailer-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .icon {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+}
